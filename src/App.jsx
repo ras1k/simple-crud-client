@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Link } from 'react-router-dom'
 
 function App() {
 
@@ -13,6 +14,20 @@ function App() {
     const user = {name, email};
     console.log(user);
 
+    fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: {
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      if(data.insertedId) {
+        alert('Data Inserted')
+      }
+    })
     form.reset();
     
 
@@ -29,6 +44,8 @@ function App() {
         <br /> <br />
         <input type="submit" value="Add User" />
       </form>
+
+      <Link to="/users">Users</Link>
     </>
   )
 }
