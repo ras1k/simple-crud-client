@@ -11,30 +11,31 @@ function App() {
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
-    const user = {name, email};
+    const user = { name, email };
     console.log(user);
 
     fetch('http://localhost:5000/users', {
       method: 'POST',
       headers: {
-        'content-type' : 'application/json'
+        'content-type': 'application/json'
       },
       body: JSON.stringify(user)
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      if(data.insertedId) {
-        alert('Data Inserted')
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.insertedId) {
+          alert('Data Inserted')
+        }
+      })
     form.reset();
-    
+
 
   }
 
   return (
     <>
+      <Link to="/users"><button>Users</button></Link>
       <h1>Simple CRUD</h1>
 
       <form onSubmit={handleAddUser}>
@@ -45,7 +46,7 @@ function App() {
         <input type="submit" value="Add User" />
       </form>
 
-      <Link to="/users">Users</Link>
+
     </>
   )
 }
